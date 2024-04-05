@@ -1,0 +1,277 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.body {}
+
+#app-root {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#box-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 65vw;
+  height: auto;
+}
+
+#box-header {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid lightgray;
+  flex-grow: 1;
+  font-family: Noto Sans Japanese, sans-serif;
+  font-optical-sizing: auto;
+  font-size: 14px;
+  text-align: left;
+}
+
+.box-row {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid lightgray;
+  font-family: Noto Sans Japanese, sans-serif;
+  font-optical-sizing: auto;
+  font-size: 14px;
+  text-align: left;
+}
+
+
+.box-row-main {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: left;
+}
+
+.box-row-sub {
+  display: flex;
+  padding-right: 10px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: left;
+  background-color: rgb(235, 235, 230);
+  padding: 1rem 0;
+  animation: fadeIn;
+  animation-duration: 0.75s;
+}
+
+.box-row-sub-label {
+  width: 85%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.box-row-sub-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+.box-row-sub-content>* {
+  text-align: left;
+  font-family: Poppins, sans-serif;
+  font-weight: 200;
+  padding: 0 10px;
+}
+
+.box-row-sub-label>div {
+  text-align: left;
+  font-family: Poppins, sans-serif;
+  font-weight: 500;
+  padding: 0 10px;
+}
+
+
+.row-cell,
+.header-cell {
+  padding: 8px 0px;
+  flex: 1 1 0;
+  width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  flex-direction: row;
+  color: #191919;
+  text-align: left;
+}
+
+.cell-content {
+  text-align: center;
+  justify-content: center;
+}
+
+
+.box-row-main:last-child,
+.box-row-main:last-child>div,
+.box-row-sub-content,
+#box-header:last-child {
+  width: 18.65%;
+  padding-left: 0;
+}
+
+
+.row-cell:last-of-type,
+.header-cell:last-of-type {
+  display: flex;
+  justify-content: right;
+  flex-direction: row;
+  flex-grow: 0.25;
+}
+
+.expand {
+  padding: 0 0.5rem;
+}
+
+.expand:hover {
+  cursor: pointer;
+}
+
+.fav {
+  padding: 0 0.5rem;
+}
+
+
+.row-cell:first-child,
+.header-cell:first-child {
+  display: flex;
+  justify-content: left;
+  flex-direction: row;
+  flex-grow: 0.50;
+}
+
+
+
+/* -----------dynamic styles------ */
+.green {
+  color: rgb(42, 194, 122);
+}
+
+.red {
+  color: rgb(250, 100, 100);
+}
+
+.orange {
+  color: rgb(255, 153, 0);
+}
+
+/* ------------- header -------- */
+#box-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 65vw;
+  height: auto;
+}
+
+/* 
+---------- */
+
+
+.link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.cell-content-fav {
+  color: var(--fav-icon-color-unmarked);
+}
+
+.cell-content-fav:hover {
+  color: gray;
+  cursor: pointer;
+}
+
+:root {
+  --fav-icon-color-unmarked: lightgray;
+  --fav-icon-color-marked: red;
+}
+
+
+/* ----------- */
+
+#action-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+  width: 65vw;
+  height: auto;
+  padding: 20px 0;
+  gap: 20px;
+}
+
+.action-bar-cell-button {
+  font-family: Poppins, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 5px 12px;
+  color: #f2f2f2;
+  background-color: rgb(5, 110, 255);
+  border-radius: 5px;
+  border: solid 2px rgb(5, 110, 255);
+}
+
+.action-bar-cell-toggle {
+  padding: 4px 10px;
+  border: 1px solid rgb(5, 110, 255);
+  color: #f2f2f2;
+  font-family: Poppins, sans-serif;
+  font-weight: 500;
+}
+
+button {
+  cursor: pointer;
+}
+
+.action-bar-cell-toggle:hover {}
+
+.action-bar-cell-toggle:last-child {
+  border-radius: 0 20px 20px 0;
+  background-color: #f2f2f2;
+  color: rgb(5, 110, 255);
+}
+
+.action-bar-cell-toggle:first-child {
+  background-color: rgb(5, 110, 255);
+  border-radius: 20px 0px 0px 20px;
+}
+
+
+
+
+
+
+
+
+/* -------animations */
+@keyframes fadeIn {
+  0% {
+    opacity: 0.5;
+    display: none;
+  }
+
+  50% {
+    opacity: 0.75;
+    display: flex;
+  }
+
+  100% {
+    opacity: 1;
+    display: flex;
+  }
+}
