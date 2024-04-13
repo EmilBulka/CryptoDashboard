@@ -17,9 +17,9 @@ class CryptoCurrency {
 
 function createTableContent(data) {
 
-  const app = document.getElementById("app-root");
+  let boxContainer = document.getElementById("box-container");
   let box = document.createElement("div");
-  box.setAttribute("id", "box-container")
+  box.setAttribute("id", "rate-container");
   let boxRow;
   let boxRowMain;
   let boxRowSub;
@@ -90,7 +90,6 @@ function createTableContent(data) {
           boxRowSubContentCell.innerHTML = '<i class="fa-solid fa-arrow-up-right-from-square"></i>';
         }
 
-
         boxRowSubContent.appendChild(boxRowSubContentCell);
         propIndex++;
       }
@@ -112,7 +111,7 @@ function createTableContent(data) {
     boxRow.appendChild(boxRowSub)
     box.appendChild(boxRow)
   }
-  app.appendChild(box);
+  boxContainer.appendChild(box);
 }
 
 async function fetchData() {
@@ -158,7 +157,7 @@ main();
 
 
 function createHeader() {
-  let app = document.getElementById("app-root");
+  let boxContainer = document.getElementById("box-container");
   let header = document.createElement("div");
   header.setAttribute("id", "box-header")
   const propNames = ['', 'rank', 'symbol', 'name', 'price', 'changePercent24Hr', 'marketCapUsd', ""];
@@ -170,7 +169,9 @@ function createHeader() {
     headerCell.innerText = `${headerCellNames[i]}`
     header.appendChild(headerCell);
   }
-  app.appendChild(header);
+  let actionBar = document.getElementById("action-bar")
+  header.style.top = (actionBar.offsetHeight - 1) + "px";
+  boxContainer.appendChild(header);
 
 }
 
@@ -188,12 +189,15 @@ function setPriceChangeColor() {
   }
 }
 
-
-
-async function displayMain() {
-  createActionBar();
-  await createCryptoTable()
+function evenPriceChangeAlign() {
+  let elements = document.getElementsByClassName('cell-content-changePercent24Hr')
+  for (let i = 0; i < elements.length; i++) {
+    if (elements[i].innerText > 0) {
+      elements[i].textContent = '\xa0' + elements[i].innerText;
+    }
+  }
 }
+
 
 
 function assignEventToFavIcons() {
@@ -214,11 +218,11 @@ function assignEventToFavIcons() {
 }
 
 function createActionBar() {
-  let app = document.getElementById("app-root");
+  let boxContainer = document.getElementById("box-container");
   let actionBar = document.createElement("div");
   actionBar.setAttribute("id", "action-bar")
   const actionNames = [
-    ["Refresh rates"],
+    ["Refresh Rates"],
     ["Favourite"],
     ["Sort Price (DESC)"],
     ["USD", "EUR"]
@@ -242,7 +246,7 @@ function createActionBar() {
 
     actionBar.appendChild(actionBarCell);
   }
-  app.appendChild(actionBar);
+  boxContainer.appendChild(actionBar);
 }
 
 function assignEventToFavourites() {
@@ -282,70 +286,89 @@ function assignShowHideRowSubContent() {
 
 }
 
+function clearTable() {
+  let rateContainer = document.getElementById("rate-container");
+  rateContainer.remove();
+  let header = document.getElementById("box-header");
+  header.remove();
+
+}
 
 function assignRefreshRatesEvent() {
 
   let refreshButton = document.querySelector('.action-bar-cell-button')
 
-  refreshButton.addEventListener('click', () => {
+  refreshButton.addEventListener('click', async () => {
+    let toggleBtnUsd = document.getElementById('toggle-USD');
+    let toggleBtnEur = document.getElementById('toggle-EUR');
+    toggleBtnUsd.style.color = '#f2f2f2';
+    toggleBtnUsd.style.backgroundColor = 'rgb(5, 110, 255)'
+    toggleBtnEur.style.backgroundColor = '#f2f2f2';
+    toggleBtnEur.style.color = 'rgb(5, 110, 255)';
+
+    let header = document.getElementById("box-header")
+    header.style.display = "none";
+    clearTable();
     fetchData().then(data => {
+      createHeader();
       createTableContent(data);
-      setPriceChangeColor();
       assignEventToFavIcons();
       assignEventToFavourites();
       assignShowHideRowSubContent();
+      evenPriceChangeAlign();
+      setPriceChangeColor();
     });
-  })
+  });
+
+
 
 
 }
-
 
 function toggleCurrency() {
   let toggleBtnEur = document.getElementById('toggle-EUR');
   let toggleBtnUsd = document.getElementById('toggle-USD');
   let prices;
+  let capitalization;
 
   toggleBtnEur.addEventListener('click', () => {
-    prices = document.getElementsByClassName("cell-content-price");
-    Array.from(prices).forEach(x => {
-      x.innerText = (parseFloat(x.innerText) * 1.11111111111).toFixed(2);
-    })
-    toggleBtnEur.style.color = '#f2f2f2';
-    toggleBtnEur.style.backgroundColor = 'rgb(5, 110, 255)'
-    toggleBtnUsd.style.backgroundColor = '#f2f2f2';
-    toggleBtnUsd.style.color = 'rgb(5, 110, 255)';
+    if (getComputedStyle(toggleBtnEur).backgroundColor === 'rgb(242, 242, 242)') {
+      prices = document.getElementsByClassName("cell-content-price");
+      capitalization = document.getElementsByClassName("cell-content-marketCapUsd");
+      Array.from(prices).forEach(x => {
+        x.innerText = (parseFloat(x.innerText) * 0.9).toFixed(2);
+      })
+      Array.from(capitalization).forEach(x => {
+        x.innerText = (parseFloat(x.innerText) * 0.9).toFixed(2);
+      })
+      toggleBtnEur.style.color = '#f2f2f2';
+      toggleBtnEur.style.backgroundColor = 'rgb(5, 110, 255)'
+      toggleBtnUsd.style.backgroundColor = '#f2f2f2';
+      toggleBtnUsd.style.color = 'rgb(5, 110, 255)';
+
+    }
   });
 
   toggleBtnUsd.addEventListener('click', () => {
-    prices = document.getElementsByClassName("cell-content-price");
-    Array.from(prices).forEach(x => {
-      x.innerText = (parseFloat(x.innerText) * 0.9).toFixed(2);
-    });
-    toggleBtnUsd.style.color = '#f2f2f2';
-    toggleBtnUsd.style.backgroundColor = 'rgb(5, 110, 255)'
-    toggleBtnEur.style.backgroundColor = '#f2f2f2';
-    toggleBtnEur.style.color = 'rgb(5, 110, 255)';
+    if (getComputedStyle(toggleBtnUsd).backgroundColor === 'rgb(242, 242, 242)') {
+      prices = document.getElementsByClassName("cell-content-price");
+      capitalization = document.getElementsByClassName("cell-content-marketCapUsd");
+      Array.from(prices).forEach(x => {
+        x.innerText = (parseFloat(x.innerText) / 0.9).toFixed(2);
+      });
+      Array.from(capitalization).forEach(x => {
+        x.innerText = (parseFloat(x.innerText) / 0.9).toFixed(2);
+      });
+      toggleBtnUsd.style.color = '#f2f2f2';
+      toggleBtnUsd.style.backgroundColor = 'rgb(5, 110, 255)'
+      toggleBtnEur.style.backgroundColor = '#f2f2f2';
+      toggleBtnEur.style.color = 'rgb(5, 110, 255)';
+    }
+
   });
 
 }
 
-
-async function createCryptoTable() {
-  createHeader();
-
-  fetchData().then(data => {
-    createTableContent(data);
-    setPriceChangeColor();
-    assignEventToFavIcons();
-    assignEventToFavourites();
-    assignShowHideRowSubContent();
-  });
-
-  assignRefreshRatesEvent();
-  toggleCurrency();
-  assignPriceSorting();
-}
 
 function assignPriceSorting() {
 
@@ -357,6 +380,8 @@ function assignPriceSorting() {
     let prices = document.querySelectorAll('.box-row');
     let sortedArray;
     let pricesArray = [];
+
+    prices = Array.from(prices).filter(x => getComputedStyle(x).display !== 'none')
 
     Array.from(prices).forEach(x => {
       pricesArray.push([x.cloneNode(true), x.querySelector('.cell-content-price').textContent])
@@ -373,14 +398,11 @@ function assignPriceSorting() {
     }
 
     assignShowHideRowSubContent();
-
+    assignEventToFavIcons();
   })
 }
 
-function main() {
-  displayMain()
 
-}
 
 function changeArrayOrder(baseData, sortedData) {
   for (let i = 0; i < baseData.length; i++) {
@@ -401,4 +423,45 @@ function changeArrayOrder(baseData, sortedData) {
       baseData[i].appendChild(child.cloneNode(true));
     });
   }
+}
+
+function createBoxShadow() {
+  const app = document.getElementById("app-root");
+  let boxShadow = document.createElement("div");
+  boxShadow.setAttribute("id", "box-shadow");
+  app.appendChild(boxShadow);
+}
+
+function createBoxContainer() {
+  let boxContainer = document.createElement("div");
+  boxContainer.setAttribute("id", "box-container")
+  let boxShadow = document.getElementById("box-shadow");
+  boxShadow.appendChild(boxContainer);
+}
+
+function main() {
+  createBoxShadow();
+  createBoxContainer();
+  displayMain()
+}
+
+async function createCryptoTable() {
+  fetchData().then(data => {
+    createTableContent(data);
+    setPriceChangeColor();
+    assignEventToFavIcons();
+    assignEventToFavourites();
+    assignShowHideRowSubContent();
+    evenPriceChangeAlign();
+  });
+
+  assignRefreshRatesEvent();
+  toggleCurrency();
+  assignPriceSorting();
+}
+
+async function displayMain() {
+  createActionBar();
+  createHeader();
+  await createCryptoTable();
 }

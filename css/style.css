@@ -4,22 +4,53 @@
   padding: 0;
 }
 
-.body {}
-
-#app-root {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+body {
+  min-width: 100vw;
+  min-height: 100vh;
+  background-image: url("./images/bitcoin-4481815_1920.jpg");
+  background-size: fill;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
 }
 
+
+#box-shadow {
+  min-width: 100%;
+  min-height: 100%;
+  min-width: 100vw;
+  min-height: 100vh;
+  opacity: 90%;
+  background-color: #f2f2f2;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#app-root {
+  min-width: 100%;
+  min-height: 100%;
+  width: 100%;
+  height: 100%;
+  opacity: 91%;
+  background-color: #f2f2f2;
+}
+
+
 #box-container {
+  min-width: 65vw;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
+}
+
+#rate-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
   width: 65vw;
-  height: auto;
+  height: 100%;
 }
 
 #box-header {
@@ -28,12 +59,14 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  border-bottom: 1px solid lightgray;
+  border: 1px solid lightgray;
   flex-grow: 1;
   font-family: Noto Sans Japanese, sans-serif;
   font-optical-sizing: auto;
   font-size: 14px;
   text-align: left;
+  text-transform: capitalize;
+  font-weight: 600;
 }
 
 .box-row {
@@ -41,6 +74,8 @@
   display: flex;
   flex-direction: column;
   border-bottom: 1px solid lightgray;
+  /* border: 1px solid lightgray;
+  border-top: 0; */
   font-family: Noto Sans Japanese, sans-serif;
   font-optical-sizing: auto;
   font-size: 14px;
@@ -170,6 +205,10 @@
 
 /* ------------- header -------- */
 #box-header {
+  background-color: white;
+  border: lightgray solid 1px;
+  z-index: 10;
+  position: sticky;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -197,7 +236,7 @@
 }
 
 :root {
-  --fav-icon-color-unmarked: lightgray;
+  --fav-icon-color-unmarked: #B4B4B4;
   --fav-icon-color-marked: red;
 }
 
@@ -205,14 +244,20 @@
 /* ----------- */
 
 #action-bar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: white;
   display: flex;
   flex-direction: row;
   justify-content: left;
   align-items: center;
-  width: 65vw;
+  max-width: 65vw;
   height: auto;
   padding: 20px 0;
-  gap: 20px;
+  gap: 10px;
+  border: lightgray solid 1px;
+  border-bottom: 0px;
 }
 
 .action-bar-cell-button {
@@ -238,7 +283,10 @@ button {
   cursor: pointer;
 }
 
-.action-bar-cell-toggle:hover {}
+#action-bar-cell-0 {
+  margin-left: 10px;
+}
+
 
 .action-bar-cell-toggle:last-child {
   border-radius: 0 20px 20px 0;
@@ -250,12 +298,6 @@ button {
   background-color: rgb(5, 110, 255);
   border-radius: 20px 0px 0px 20px;
 }
-
-
-
-
-
-
 
 
 /* -------animations */
