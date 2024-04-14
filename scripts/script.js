@@ -43,8 +43,8 @@ function createTableContent(data) {
   const rowMainCells = [
     "id",
     "rank",
-    "symbol",
     "name",
+    "symbol",
     "price",
     "changePercent24Hr",
     "marketCapUsd",
@@ -148,8 +148,8 @@ async function fetchData() {
         new CryptoCurrency(
           item.id,
           item.rank,
-          item.symbol,
           item.name,
+          item.symbol,
           setPrecision(item.supply, 0),
           setPrecision(item.maxSupply, 0),
           setPrecision(item.marketCapUsd, 0),
@@ -188,8 +188,8 @@ function createHeader() {
   const propNames = [
     "",
     "rank",
-    "symbol",
     "name",
+    "symbol",
     "price",
     "changePercent24Hr",
     "marketCapUsd",
@@ -198,8 +198,8 @@ function createHeader() {
   const headerCellNames = [
     "",
     "rank",
-    "symbol",
     "name",
+    "symbol",
     "price",
     "24h(%)",
     "capitalization",
