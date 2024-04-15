@@ -31,12 +31,27 @@ body {
   background-color: #f2f2f2;
 }
 
+.error {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#errorBox {
+  padding: 0 20px;
+  padding-top: 25%;
+  font-size: 72px;
+  text-align: center;
+}
+
 #box-container {
   min-width: var(--box-container-width);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  padding-bottom: 50px;
 }
 
 #rate-container {
@@ -295,6 +310,10 @@ button {
 }
 
 @media (max-width: 1280px) {
+  body {
+    background-size: cover;
+  }
+
   :root {
     --box-container-width: 85vw;
   }
@@ -319,6 +338,11 @@ button {
 }
 
 @media (max-width: 1024px) {
+  #errorBox {
+    padding-top: 25%;
+    font-size: 48px;
+  }
+
   :root {
     --box-container-width: 85vw;
   }
@@ -393,6 +417,16 @@ button {
 }
 
 @media (max-width: 640px) {
+  #errorBox {
+    padding-top: 25%;
+    font-size: 24px;
+  }
+
+  body {
+    background-size: cover;
+    background-position: 30%;
+  }
+
   :root {
     --box-container-width: 100%;
     --box-font: 13px;
@@ -401,9 +435,13 @@ button {
   .row-cell:nth-child(2),
   .header-cell:nth-child(2) {
     flex-grow: 0.25;
+    padding-right: 8px;
   }
-  .row-cell:nth-child(3) {
+  .row-cell:nth-child(3),
+  .header-cell:nth-child(3) {
     padding-right: 2px;
+    flex-grow: 0.5;
+    word-break: break-all;
   }
 
   .row-cell:nth-child(4),
@@ -434,6 +472,11 @@ button {
 }
 
 @media (max-width: 476px) {
+  body {
+    background-size: cover;
+    background-position: 25%;
+  }
+
   .header-cell {
     font-size: 10px;
   }

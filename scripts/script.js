@@ -488,6 +488,18 @@ function calculateActionBarPositionDynamicallyEvent(item) {
   });
 }
 
+function errorMessageView() {
+  let mainPage = document.getElementById("box-container");
+  mainPage.classList.add("error");
+  let errorBox = document.createElement("div");
+  let errorParagraph = document.createElement("p");
+  errorParagraph.textContent = "Something went wrong :( Please try again later";
+  errorParagraph.style.color = "red";
+  errorBox.setAttribute("id", "errorBox");
+  errorBox.appendChild(errorParagraph);
+  mainPage.appendChild(errorBox);
+}
+
 function main() {
   createBoxShadow();
   createBoxContainer();
@@ -496,22 +508,25 @@ function main() {
 
 async function createCryptoTable() {
   fetchData().then((data) => {
-    createTableContent(data);
-    setPriceChangeColor();
-    assignEventToFavIcons();
-    assignEventToFavourites();
-    assignShowHideRowSubContent();
-    evenPriceChangeAlign();
+    if (data !== null) {
+      createActionBar();
+      createHeader();
+      createTableContent(data);
+      setPriceChangeColor();
+      assignEventToFavIcons();
+      assignEventToFavourites();
+      assignShowHideRowSubContent();
+      evenPriceChangeAlign();
+      assignRefreshRatesEvent();
+      toggleCurrency();
+      assignPriceSorting();
+    } else {
+      errorMessageView();
+    }
   });
-
-  assignRefreshRatesEvent();
-  toggleCurrency();
-  assignPriceSorting();
 }
 
 async function displayMain() {
-  createActionBar();
-  createHeader();
   await createCryptoTable();
 }
 
