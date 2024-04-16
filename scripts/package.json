@@ -1,0 +1,13 @@
+{
+    "name": "crypto-dashboard",
+    "version": "1.0.0",
+    "description": "Crypto Dashboard App",
+    "main": "script.js",
+    "scripts": {
+        "start": "node script.js"
+    },
+    "keywords": [],
+    "author": "Emil Bulka",
+    "license": "MIT",
+    "dependencies": {}
+}
