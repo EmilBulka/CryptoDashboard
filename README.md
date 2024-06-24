@@ -43,6 +43,10 @@ To run the CryptoDashboard application in Visual Studio Code:
 4. Start the development server: `npm start`.
 5. Open a web browser and navigate to `http://localhost:3000` to view the application.
 
+## Running deployed applcation on Vercel website
+
+please visit link and enjoy: https://crypto-dashboard-dusky.vercel.app/
+
 ## Author
 
 - Emil Bułka
